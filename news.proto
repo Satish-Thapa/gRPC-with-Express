@@ -8,7 +8,7 @@ message News {
 }
 
 service NewsService {
-    rpc GetAllNews (Empty) returns (NewsList) {}
+    rpc GetAllNews (Empty) returns (NewsResp) {}
     rpc GetNews (NewsId) returns (News) {}
     rpc DeleteNews (NewsId) returns (Empty) {}
     rpc EditNews (News) returns (News) {}
@@ -21,6 +21,6 @@ message NewsId {
 
 message Empty {}
 
-message NewsList {
-   repeated News news = 1;
+message NewsResp {
+   repeated News testList = 1;
 }

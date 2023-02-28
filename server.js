@@ -20,7 +20,8 @@ const news = [
 
 server.addService(newsProto.NewsService.service, {
   getAllNews: (_, callback) => {
-    callback(null, news);
+    console.log(news);
+    callback(null, news); //on error send null aarko chai return type
   },
   getNews: (_, callback) => {
     const newsId = _.request.id;
@@ -28,8 +29,10 @@ server.addService(newsProto.NewsService.service, {
     callback(null, newsItem);
   },
   deleteNews: (_, callback) => {
+    console.log(_.request.id);
     const newsId = _.request.id;
-    news = news.filter(({ id }) => id !== newsId);
+    // news = news.filter(({ id }) => id !== newsId);
+    console.log("removed");
     callback(null, {});
   },
   editNews: (_, callback) => {
@@ -38,11 +41,14 @@ server.addService(newsProto.NewsService.service, {
     newsItem.body = _.request.body;
     newsItem.postImage = _.request.postImage;
     newsItem.title = _.request.title;
+    console.log(newsItem);
     callback(null, newsItem);
   },
   addNews: (call, callback) => {
     let _news = { id: Date.now(), ...call.request };
+    console.log(_news);
     news.push(_news);
+    console.log(news);
     callback(null, _news);
   },
 });
